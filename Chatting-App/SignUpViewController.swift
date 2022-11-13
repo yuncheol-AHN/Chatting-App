@@ -6,16 +6,46 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseCore
 
 class SignUpViewController: UIViewController {
-
+    
+    @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var passwordText: UITextField!
+    
+    let sheet = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func backButton(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func signUpPressed(_ sender: UIButton) {
+        if let email = emailText.text, let password = passwordText.text {
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                
+                if let err = error {
+                    
+                    self.sheet.message = err.localizedDescription
+                    self.sheet.addAction(UIAlertAction(title: "확인!", style: .cancel))
+                    self.present(self.sheet, animated: false)
+                } else {
+                    
+                    self.dismiss(animated: false)
+                }
+            }
+        }
+        
+        
+    }
+    
     /*
     // MARK: - Navigation
 
