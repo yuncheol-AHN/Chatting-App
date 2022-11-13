@@ -15,8 +15,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     
-    let sheet = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,9 +31,10 @@ class SignUpViewController: UIViewController {
                 
                 if let err = error {
                     
-                    self.sheet.message = err.localizedDescription
-                    self.sheet.addAction(UIAlertAction(title: "확인!", style: .cancel))
-                    self.present(self.sheet, animated: false)
+                    let sheet = UIAlertController(title: "Error", message: err.localizedDescription, preferredStyle: .alert)
+                    sheet.addAction(UIAlertAction(title: "확인!", style: .default))
+                    
+                    self.present(sheet, animated: false)
                 } else {
                     
                     self.dismiss(animated: false)

@@ -6,17 +6,37 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var passwordText: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
     @IBAction func signInPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "LoginToChat", sender: self)
+        
+        if let email = emailText.text, let password = passwordText.text {
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                if let err = error {
+                    
+                    let sheet = UIAlertController(title: "Error", message: "ID not found", preferredStyle: .alert)
+                    sheet.addAction(UIAlertAction(title: "확인", style: .default))
+
+                    self.present(sheet, animated: false)
+                } else {
+                    
+                    self.performSegue(withIdentifier: "LoginToChat", sender: self)
+                }
+            }
+        }
     }
     
     /*

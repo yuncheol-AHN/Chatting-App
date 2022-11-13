@@ -87,7 +87,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textfield" translatesAutoresizingMaskIntoConstraints="NO" id="Baj-qb-gmL">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="100"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v5R-DL-rRa">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="a@b.com" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v5R-DL-rRa">
                                         <rect key="frame" x="0.0" y="25" width="384" height="23"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -111,11 +111,11 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textfield" translatesAutoresizingMaskIntoConstraints="NO" id="OWg-Xt-0Bn">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="100"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cw8-wG-Y3a">
-                                        <rect key="frame" x="0.0" y="25" width="384" height="23"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123123" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cw8-wG-Y3a">
+                                        <rect key="frame" x="0.0" y="25" width="384" height="22"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -163,8 +163,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="gnp-xB-qvS"/>
                     <connections>
-                        <outlet property="emailText" destination="v5R-DL-rRa" id="uJV-l2-OxA"/>
-                        <outlet property="passwordText" destination="cw8-wG-Y3a" id="ul3-8b-xCh"/>
+                        <outlet property="emailText" destination="v5R-DL-rRa" id="Rei-nn-fq4"/>
+                        <outlet property="passwordText" destination="cw8-wG-Y3a" id="2ms-1w-zxv"/>
                         <segue destination="ixT-BE-jd0" kind="show" identifier="LoginToChat" id="lfd-mS-xj3"/>
                     </connections>
                 </viewController>
@@ -172,10 +172,10 @@
             </objects>
             <point key="canvasLocation" x="1928" y="83"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="6y2-Uz-c6o">
             <objects>
-                <viewController id="ixT-BE-jd0" sceneMemberID="viewController">
+                <viewController id="ixT-BE-jd0" customClass="ChatViewController" customModule="Chatting_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8pT-ce-6R2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,6 +210,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="arrow.up.message.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="messagePressed:" destination="ixT-BE-jd0" eventType="touchUpInside" id="LnL-wi-CbW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -237,7 +240,18 @@
                             <constraint firstItem="EBe-VH-FyP" firstAttribute="top" secondItem="i70-Rm-OUG" secondAttribute="top" id="llf-Br-KQg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Fkb-JM-1za"/>
+                    <navigationItem key="navigationItem" id="Fkb-JM-1za">
+                        <barButtonItem key="rightBarButtonItem" title="logout" image="homekit" catalog="system" id="KBg-vF-lfO">
+                            <color key="tintColor" systemColor="systemYellowColor"/>
+                            <connections>
+                                <action selector="logoutPressed:" destination="ixT-BE-jd0" id="El6-UU-vm9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="messageText" destination="hz6-H1-VIk" id="FSD-pM-RGM"/>
+                        <outlet property="tableView" destination="EBe-VH-FyP" id="dQz-M1-fs9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e10-gX-0FR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -381,12 +395,16 @@
     <resources>
         <image name="arrow.up.message.fill" catalog="system" width="128" height="113"/>
         <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="textfield" width="298" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
