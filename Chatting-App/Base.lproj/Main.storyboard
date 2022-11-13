@@ -241,10 +241,10 @@
             </objects>
             <point key="canvasLocation" x="2903.0769230769229" y="82.464454976303315"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="qDZ-fd-d5n">
             <objects>
-                <viewController id="TxF-kT-S9W" sceneMemberID="viewController">
+                <viewController id="TxF-kT-S9W" customClass="SignUpViewController" customModule="Chatting_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pHe-pJ-Jjc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
